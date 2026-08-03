@@ -1,0 +1,5 @@
+import Stripe from 'stripe';import {createClient} from '@supabase/supabase-js';
+const stripe=new Stripe(process.env.STRIPE_SECRET_KEY);const admin=createClient(process.env.SUPABASE_URL,process.env.SUPABASE_SERVICE_ROLE_KEY);
+export const config={api:{bodyParser:false}};
+async function raw(req){const chunks=[];for await(const c of req)chunks.push(c);return Buffer.concat(chunks)}
+export default async function handler(req,res){if(req.method!=='POST')return res.status(405).end();try{const body=await raw(req);const event=stripe.webhooks.constructEvent(body,req.headers['stripe-signature'],process.env.STRIPE_WEBHOOK_SECRET);if(event.type==='checkout.session.completed'){const s=event.data.object;const appId=s.metadata?.application_id;await admin.from('application_payments').update({status:'paid',paid_at:new Date().toISOString(),stripe_payment_intent_id:String(s.payment_intent||'')}).eq('stripe_checkout_session_id',s.id);if(appId)await admin.from('applications').update({status:'submitted',submitted_at:new Date().toISOString(),application_fee_paid:true}).eq('id',appId)}res.json({received:true})}catch(e){res.status(400).send(`Webhook Error: ${e.message}`)}}
