@@ -1,16 +1,23 @@
-REFRESHED BY FAITH - DASHBOARD BUILD FIX
+REFRESHED BY FAITH — SUPABASE APPLICATIONS SETUP
 
-Replace the existing file with:
-src/pages/Dashboard.tsx
+Problem fixed:
+  Could not find the table 'public.applications' in the schema cache
 
-Do not rename the file and do not paste only part of its contents.
+INSTALL:
+1. Open the Supabase project used by refreshedbyfaith.com.
+2. Open SQL Editor.
+3. Create a new query.
+4. Open supabase-applications-setup.sql from this ZIP.
+5. Copy/run the ENTIRE SQL file.
+6. Confirm the final query returns:
+       public | applications
+7. Return to refreshedbyfaith.com/dashboard and refresh the page.
+8. Sign in and test Save Draft.
 
-This fixes the Vercel errors:
-- Dashboard.tsx is not a module
-- Cannot find name useEffect
-- Cannot find name supabase
-- Cannot find name setAuthLoading
-- TS18047 supabase is possibly null
+This creates the applications table used by src/pages/Dashboard.tsx and enables
+Row Level Security so authenticated applicants can access only their own records.
 
-After replacing the file, commit/push and let Vercel run:
-npm run build
+IMPORTANT:
+This fixes the missing applications table. The Pay $35 button also depends on
+/api/create-checkout-session and the payment-provider configuration; those are
+separate from this database-table error.
