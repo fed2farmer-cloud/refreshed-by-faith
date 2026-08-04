@@ -1,21 +1,16 @@
-REFRESHED BY FAITH - SUPABASE APPLICATIONS FIX
+REFRESHED BY FAITH - DASHBOARD BUILD FIX
 
-FILE:
-  supabase/applications_schema.sql
+Replace the existing file with:
+src/pages/Dashboard.tsx
 
-INSTALL:
-1. Open the Refreshed By Faith project in Supabase.
-2. Open SQL Editor -> New query.
-3. Open applications_schema.sql from this ZIP.
-4. Copy/paste its contents into SQL Editor and press Run.
-5. Confirm the result shows: public | applications
-6. Refresh refreshedbyfaith.com/dashboard.
-7. Sign in and test Save Draft.
+Do not rename the file and do not paste only part of its contents.
 
-This package addresses the error:
-Could not find the table 'public.applications' in the schema cache.
+This fixes the Vercel errors:
+- Dashboard.tsx is not a module
+- Cannot find name useEffect
+- Cannot find name supabase
+- Cannot find name setAuthLoading
+- TS18047 supabase is possibly null
 
-NOTE:
-The website's exact form column names may differ. If Supabase reports a
-missing-column error after installation, that error identifies the next
-schema adjustment needed.
+After replacing the file, commit/push and let Vercel run:
+npm run build
