@@ -23,3 +23,8 @@ Starter web application built from scratch for refreshedbyfaith.com.
 
 ## Important launch work
 This is a technical starter, not a compliance determination. Before collecting real applicant data, have the intake questions, privacy notice, fee/refund disclosure, housing criteria, consent language, retention policy and staff access model reviewed for the laws and certification/licensing rules that apply to the homes' location and business model. Avoid collecting information that is not necessary for housing/admissions.
+
+## v1.4 authentication + payment fix
+The applicant dashboard now restores the Supabase session with `auth.getSession()`, listens for auth changes, redirects expired sessions to sign-in, prevents payment without certification, and displays server payment configuration errors.
+
+For Stripe checkout, Vercel must also contain these **server-only** environment variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `STRIPE_SECRET_KEY`. The webhook additionally requires `STRIPE_WEBHOOK_SECRET`. Never prefix the service-role or Stripe secret with `VITE_`.
