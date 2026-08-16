@@ -1,0 +1,1 @@
+export default function StatusCard(){return <div>Status Card</div>}

@@ -1,0 +1,1 @@
+export default function ApplicationTable(){return <div>Application Table Placeholder</div>}
