@@ -1,4 +1,4 @@
-import { HeartHandshake, ShieldCheck, ClipboardCheck, Users, Activity, Stethoscope, FileCheck2, HandHeart } from 'lucide-react';
+import { HeartHandshake, ShieldCheck, ClipboardCheck, Users, Activity, Stethoscope, FileCheck2, HandHeart, Route, ClipboardList } from 'lucide-react';
 
 const strengths = [
   [HandHeart, 'Resident Support & Safety'],
@@ -9,6 +9,35 @@ const strengths = [
   [Users, 'Interdisciplinary Communication'],
   [HeartHandshake, 'ADL & Mobility Support'],
   [FileCheck2, 'Operational Accountability'],
+] as const;
+
+const leadershipTeam = [
+  {
+    name: 'Ruth E. Guerra',
+    role: 'Sober Living Administrator — Operations, Intake & Compliance',
+    icon: ClipboardList,
+    summary: 'Ruth supports the administrative backbone of Refreshed By Faith through intake coordination, documentation, staffing workflows, compliance support, reporting and confidential records management. Her background includes leadership roles in regulated healthcare administration and financial services.',
+    highlights: [
+      'Healthcare intake and administrative operations',
+      'Compliance, documentation and audit readiness',
+      'Staff onboarding and workflow coordination',
+      'Leadership reporting and client communication',
+      'Bilingual English / Spanish communication',
+    ],
+  },
+  {
+    name: 'Jesus Espinal',
+    role: 'Resident Reentry & Operations Coordinator',
+    icon: Route,
+    summary: 'Jesus supports resident reentry, transportation coordination, employment readiness, house operations and practical accountability. His lived experience with incarceration is paired with professional experience in driving, route operations, safety, documentation and customer service.',
+    highlights: [
+      'Resident reentry and practical peer support',
+      'Transportation and route coordination',
+      'Employment readiness and workplace accountability',
+      'Property and house operations',
+      'Safety, logs, documentation and dependable field work',
+    ],
+  },
 ] as const;
 
 export default function Leadership(){
@@ -48,8 +77,27 @@ export default function Leadership(){
       <div className="strengthGrid">{strengths.map(([Icon,label])=><div className="strengthCard" key={label}><Icon size={22}/><strong>{label}</strong></div>)}</div>
     </section>
 
+    <section className="leadershipTeamSection">
+      <div className="leadershipTeamHeading">
+        <span className="eyebrow">LEADERSHIP TEAM</span>
+        <h2>Experienced support for administration, reentry and daily operations.</h2>
+        <p>Our leadership team combines healthcare administration, operational discipline, resident support and lived experience to help maintain a structured, respectful recovery environment.</p>
+      </div>
+      <div className="leadershipTeamGrid">
+        {leadershipTeam.map(({name, role, icon: Icon, summary, highlights}) => <article className="leadershipTeamCard" key={name}>
+          <div className="leadershipTeamIcon"><Icon size={26}/></div>
+          <h3>{name}</h3>
+          <p className="leadershipTeamRole">{role}</p>
+          <p>{summary}</p>
+          <div className="leadershipHighlights">
+            {highlights.map((item)=><div key={item}><ShieldCheck size={16}/><span>{item}</span></div>)}
+          </div>
+        </article>)}
+      </div>
+    </section>
+
     <section className="professionalStandard">
-      <ShieldCheck size={25}/><div><strong>Professional Standard</strong><p>Ms. Salter’s leadership role is focused on recovery-housing operations and resident support. Her CNA credential and healthcare experience are not represented as authorization to provide licensed substance-use-disorder treatment or other services requiring separate professional licensure.</p></div>
+      <ShieldCheck size={25}/><div><strong>Professional Standard</strong><p>Leadership roles at Refreshed By Faith are focused on recovery-housing operations, resident support and administrative coordination. Healthcare credentials, lived experience and operational backgrounds are not represented as authorization to provide licensed substance-use-disorder treatment or other services requiring separate professional licensure.</p></div>
     </section>
   </div>
 }
